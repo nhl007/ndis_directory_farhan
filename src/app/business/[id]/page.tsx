@@ -15,7 +15,6 @@ import { BusinessDatabaseModel } from "@/types/business";
 import SmallVerificationBox from "@/components/ui/SmallVerificationBox";
 import Link from "next/link";
 import LocationDropdown from "@/components/LocationDropdown";
-// import Reviews from "@/components/Reviews";
 
 interface PageProps {
   params: {
@@ -247,12 +246,6 @@ const page = async ({ params }: PageProps) => {
             ) : null}
           </div>
         </div>
-        {/* <Reviews
-          total={data.totalReviews ? data.totalReviews}
-          rating={data.rating}
-          _id={params.id}
-          reviewsData={data.reviews}
-        /> */}
       </MaxWidthWrapper>
     </div>
   );
