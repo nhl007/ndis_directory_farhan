@@ -3,7 +3,6 @@
 import querystring from "querystring";
 
 import User from "@/models/User";
-// import { generateHmacSha256 } from "@/utils/utils";
 
 import CryptoJS from "crypto-js";
 

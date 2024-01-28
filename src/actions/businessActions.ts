@@ -230,8 +230,6 @@ export async function searchBusinesses(searchParams: SearchParamsActions) {
 
     const query = await constructQuery(searchParams, 20);
 
-    // console.log("\n --1-- Did the first search \n", query);
-
     let doc = await Business.find(query)
       .select(
         "_id BusinessName blurb rank serviceLocations EntityTypeCode ndis_registered image"
@@ -240,8 +238,6 @@ export async function searchBusinesses(searchParams: SearchParamsActions) {
 
     if (doc.length <= 0 && searchParams.postalCode) {
       const newQuery = await constructQuery(searchParams, 50);
-
-      // console.log("\n --1-- did a 50 km search\n", newQuery);
 
       doc = await Business.find(newQuery)
         .select(
@@ -352,70 +348,5 @@ export async function updateNdisVerification(id: string) {
     return stringifyResponse(buss);
   } catch (error) {
     return null;
-  }
-}
-
-//! product review
-
-export async function postBusinessReview(
-  data: Omit<BusinessReviewData, "date">
-) {
-  try {
-    const { rating, description, caption, user, _id } = data;
-
-    // console.log("r---" + rating);
-
-    const review = {
-      user: user._id,
-      caption: caption,
-      rating: Number(rating),
-      description: description,
-    };
-
-    const business = await Business.findById(_id).select(
-      "reviews totalReviews rating"
-    );
-
-    const hasReviewed = business.reviews.find(
-      (r: any) => r.user.toString() === user.toString()
-    );
-
-    // console.log("hasReviewed", hasReviewed);
-
-    if (hasReviewed) {
-      business.reviews.forEach((review: any) => {
-        if (review.user.toString() === user.toString()) {
-          review.caption = caption;
-          review.description = description;
-          review.rating = rating;
-        }
-      });
-    } else {
-      business.reviews.push(review);
-      business.totalReviews = business.reviews.length;
-    }
-
-    business.rating =
-      business.reviews.reduce((acc: Number, item: any) => {
-        return item.rating + acc;
-      }, 0) / business.reviews.length;
-
-    // console.log("before update->", business);
-
-    await Business.findByIdAndUpdate(_id, business, {
-      new: true,
-    });
-
-    return {
-      success: true,
-      message: hasReviewed
-        ? "Review updated successfully"
-        : "Successfully submitted your review",
-    };
-  } catch (error) {
-    return {
-      success: false,
-      message: "Error Occurred! Please try again",
-    };
   }
 }

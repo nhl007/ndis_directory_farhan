@@ -13,7 +13,7 @@ cloud.config({
 export const uploadImage = async (file: string) => {
   try {
     const res = await cloud.uploader.upload(file, {
-      upload_preset: "noteapp",
+      upload_preset: "Directory",
       unique_filename: true,
       format: "webp",
     });

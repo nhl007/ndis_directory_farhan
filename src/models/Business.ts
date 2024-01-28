@@ -15,7 +15,6 @@ const BusinessSchema = new Schema({
   Abn: {
     type: String,
     unique: [true, "Already business registered with this Abn number!"],
-    // required: [true, "The abn number is required!"],
   },
   AbnStatus: {
     type: String,
@@ -145,8 +144,6 @@ const BusinessSchema = new Schema({
     type: String,
   },
 });
-
-// BusinessSchema.index({ location: "2dsphere" });
 
 // BusinessSchema.index({ "locations.coordinates": "2dsphere" });
 

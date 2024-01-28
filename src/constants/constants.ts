@@ -1,9 +1,4 @@
 export const accountTypeOptions = [
-  // { label: "NDIS Participant", value: "NDIS Participant" },
-  // {
-  //   label: "Participant Support Person (Family, Friends, Others)",
-  //   value: "Participant Support Person (Family, Friends, Others)",
-  // },
   { label: "NDIS Provider", value: "NDIS Provider" },
   {
     label: "B2B Provider (Services for NDIS Providers)",
@@ -354,11 +349,6 @@ export const popularServicesOptions = [
   "Physiotherapy",
   "Positive Behavior Support Plan",
   "Key Worker",
-  // "Accessing the Community",
-  // "Nurse",
-  // "Mentor",
-  // "Social Worker",
-  // "Art Therapy",
 ];
 
 export const complexNeedsSupportedOptions = [
